@@ -54,7 +54,7 @@ node -v
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-repo/energy-saving-portal.git
+git clone https://github.com/shinydidde/energy-saving-portal
 ```
 
 2. Navigate to the project folder:
