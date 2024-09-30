@@ -14,12 +14,12 @@ export default function GaugeChart({ savings }: GaugeChartProps) {
   const data = {
     datasets: [
       {
-        data: [savings, 100 - savings], // Savings and remaining percentage
-        backgroundColor: ['#4caf50', '#e0e0e0'], // Green and light grey
-        borderWidth: 0, // No borders
-        cutout: '80%', // The hole in the middle
-        rotation: -90, // Start the chart at the top
-        circumference: 180, // Only draw half the chart (180 degrees)
+        data: [savings, 100 - savings],
+        backgroundColor: ['#4caf50', '#e0e0e0'],
+        borderWidth: 0,
+        cutout: '80%',
+        rotation: -90,
+        circumference: 180,
       },
     ],
   };
@@ -28,15 +28,11 @@ export default function GaugeChart({ savings }: GaugeChartProps) {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: {
-        display: false, // Hide the legend
-      },
-      tooltip: {
-        enabled: false, // Disable tooltips
-      },
+      legend: { display: false },
+      tooltip: { enabled: false },
     },
-    rotation: -90, // Start from the top
-    circumference: 180, // Half circle
+    rotation: -90,
+    circumference: 180,
   };
 
   return (
@@ -48,7 +44,6 @@ export default function GaugeChart({ savings }: GaugeChartProps) {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          textAlign: 'center',
           fontSize: '2rem',
           fontWeight: 'bold',
         }}
