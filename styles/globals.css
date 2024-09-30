@@ -32,3 +32,10 @@ h5 {
   font-size: 24px;
   font-weight: bold;
 }
+
+.doughnut-container {
+  max-width: 100%; /* Ensure it never exceeds its parent width */
+  height: auto;    /* Let the height adjust automatically */
+  margin: 0 auto;  /* Center the chart horizontally */
+}
+

@@ -36,7 +36,7 @@ export default function GaugeChart({ savings }: GaugeChartProps) {
   };
 
   return (
-    <div className="doughnut-container" style={{ position: 'relative', height: '200px', width: '400px' }}>
+    <div className="doughnut-container" style={{ position: 'relative', height: '100%', width: '100%' }}>
       <Doughnut data={data} options={options} />
       <div
         style={{
@@ -44,7 +44,7 @@ export default function GaugeChart({ savings }: GaugeChartProps) {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          fontSize: '2rem',
+          fontSize: 'calc(16px + 2vw)', // Responsive font size
           fontWeight: 'bold',
         }}
       >
