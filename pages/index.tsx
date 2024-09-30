@@ -1,6 +1,7 @@
 // pages/index.tsx
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import styles from '../styles/Login.module.css'; // CSS module for login styling
 
 export default function LoginPage() {
@@ -33,7 +34,12 @@ export default function LoginPage() {
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleLogin}>
         <div className={styles.logo}>
-          <img src="/logo.png" alt="logo" />
+            <Image
+                src="/logo.png"
+                alt="logo"
+                width={200}
+                height={100}
+            />
         </div>
         <h2 className={styles.h2}>eco2web</h2>
         <input

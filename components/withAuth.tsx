@@ -9,11 +9,11 @@ export default function withAuth(WrappedComponent: React.ComponentType) {
     const router = useRouter();
 
     useEffect(() => {
-      const isAuthenticated = localStorage.getItem('auth');
-      if (!isAuthenticated) {
-        router.push('/');
-      }
-    }, []);
+        const isAuthenticated = localStorage.getItem('auth');
+        if (isAuthenticated) {
+          router.push('/devices'); // Redirect to devices page if logged in
+        }
+      }, [router]);
 
     return (
       <>

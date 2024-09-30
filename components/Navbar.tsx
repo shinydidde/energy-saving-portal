@@ -1,5 +1,6 @@
 // components/Navbar.tsx
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import styles from '../styles/Navbar.module.css';
 
 export default function Navbar() {
@@ -13,7 +14,7 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navItems}>
-        <a className={styles.navLink} href="/devices">Devices</a>
+        <Link className={styles.navLink} href="/devices">Devices</Link>
       </div>
       <button className={styles.logoutButton} onClick={handleLogout}>
         Logout
