@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../components/Layout';
-import styles from '../styles/containerdetails.module.css'; // Import CSS module
+import styles from '../styles/ContainerDetails.module.css'; // Import CSS module
 
 export default function ContainersPage() {
   const router = useRouter();
