@@ -41,7 +41,7 @@ export default function LoginPage() {
                 height={100}
             />
         </div>
-        <h2 className={styles.h2}>eco2web</h2>
+        <h2 className={styles.h2}>Login</h2>
         <input
           type="email"
           placeholder="Email"
