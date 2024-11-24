@@ -11,7 +11,7 @@ export default function withAuth(WrappedComponent: React.ComponentType) {
     useEffect(() => {
         const isAuthenticated = localStorage.getItem('auth');
         if (isAuthenticated) {
-          router.push('/devices'); // Redirect to devices page if logged in
+          router.push('/containers'); // Redirect to devices page if logged in
         }
       }, [router]);
 

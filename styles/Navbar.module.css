@@ -3,9 +3,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #60a165;
-    padding: 1rem;
-    color: white;
+    background-color: #A2D9A7;
+    padding: 10px;
+    color: black;
+    margin-bottom: 20px;
   }
 
   .navItems {
@@ -14,7 +15,7 @@
   }
 
   .navLink {
-    color: white;
+    color: black;
     text-decoration: none;
     font-size: 1.2rem;
   }

@@ -13,7 +13,7 @@ export default function LoginPage() {
   useEffect(() => {
     const isAuthenticated = localStorage.getItem('auth');
     if (isAuthenticated) {
-      router.push('/devices'); // Redirect to devices page if already logged in
+      router.push('/containers'); // Redirect to devices page if already logged in
     }
   }, [router]);
 
@@ -24,7 +24,7 @@ export default function LoginPage() {
     // Mock login validation
     if (email === 'dhqguest01@ops-systeme.de' && password === 'password') {
       localStorage.setItem('auth', 'true'); // Store login status in localStorage
-      router.push('/devices'); // Redirect to devices page after login
+      router.push('/containers'); // Redirect to devices page after login
     } else {
       alert('Invalid credentials');
     }

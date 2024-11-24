@@ -1,0 +1,172 @@
+.container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+.header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.layout {
+  display: flex;
+  gap: 20px;
+}
+
+.sidebar {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #ffffff;
+}
+
+.sidebar h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.sidebar p {
+  margin: 8px 0;
+}
+
+.sidebar .status {
+  font-weight: bold;
+  color: green;
+}
+
+.sidebar .alarms {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .alarms.yellow {
+  color: orange;
+}
+
+.sidebar .alarms.red {
+  color: red;
+}
+
+.sidebar .control {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.switch {
+  width: 50px;
+  height: 25px;
+  border-radius: 15px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  transition: background-color 0.3s ease, justify-content 0.3s ease;
+}
+
+.switch.on {
+  background-color: green; /* Green for ON state */
+  justify-content: flex-end;
+}
+
+.switch.off {
+  background-color: red; /* Red for OFF state */
+  justify-content: flex-start;
+}
+
+.switch span {
+  position: absolute;
+  font-size: 12px;
+  color: white;
+  font-weight: bold;
+}
+
+
+.content {
+  flex: 3;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.table th {
+  background-color: #e8f8f5;
+  font-weight: bold;
+}
+
+.weather {
+  flex: 1;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #ffffff;
+}
+
+.weather h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.weather .temperature {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.weather .chart {
+  margin-top: 20px;
+}
+
+.performance {
+  margin-top: 20px;
+}
+
+.performance th {
+  background-color: #e8f8f5;
+}
+
+.performance td {
+  font-weight: bold;
+}
+
+.status {
+  font-weight: bold;
+}
+
+.online {
+  color: #16a34a; /* Green */
+}
+
+.notAvailable {
+  color: #6b7280; /* Gray */
+}
+
+.offline {
+  color: #ef4444; /* Red */
+}
+
+.yellow {
+  color: yellow;
+}

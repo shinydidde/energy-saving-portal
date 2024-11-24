@@ -14,7 +14,7 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navItems}>
-        <Link className={styles.navLink} href="/devices">Devices</Link>
+        <Link className={styles.navLink} href="/containers">Containers</Link>
       </div>
       <button className={styles.logoutButton} onClick={handleLogout}>
         Logout
