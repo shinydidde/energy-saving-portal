@@ -137,12 +137,10 @@ export default function ContainerDetails() {
                                 onClick={toggleControl}
                                 style={{ cursor: 'pointer' }}
                             >
-                                <span style={{ color: 'white', fontSize: '12px', marginLeft: control ? '25px' : '5px' }}>
-                                    {control ? 'ON' : 'OFF'}
-                                </span>
+                                <div className={styles.toggleCircle}></div>
                             </div>
-
                         </div>
+
                     </div>
 
                     {/* Main Content */}

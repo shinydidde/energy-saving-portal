@@ -59,15 +59,20 @@
   gap: 10px;
 }
 
+.control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .switch {
   width: 50px;
   height: 25px;
   border-radius: 15px;
-  position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  transition: background-color 0.3s ease, justify-content 0.3s ease;
+  position: relative;
+  transition: background-color 0.3s ease;
 }
 
 .switch.on {
@@ -80,11 +85,13 @@
   justify-content: flex-start;
 }
 
-.switch span {
-  position: absolute;
-  font-size: 12px;
-  color: white;
-  font-weight: bold;
+.toggleCircle {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
 
@@ -167,6 +174,3 @@
   color: #ef4444; /* Red */
 }
 
-.yellow {
-  color: goldenrod;
-}

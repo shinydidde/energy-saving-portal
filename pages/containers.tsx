@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../components/Layout';
-import styles from '../styles/ContainerDetails.module.css'; // Import CSS module
+import styles from '../styles/Containers.module.css'; // Import CSS module
 
 export default function ContainersPage() {
   const router = useRouter();
@@ -53,7 +53,7 @@ export default function ContainersPage() {
               <tr key={index}>
                 <td
                   onClick={() => handleRowClick(container.name)}
-                  style={{ cursor: 'pointer', color: 'blue' }}
+                  style={{ cursor: 'pointer' }}
                 >
                   {container.name}
                 </td>

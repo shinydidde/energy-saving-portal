@@ -1,0 +1,15 @@
+.online {
+    color: #16a34a; /* Green */
+  }
+
+  .notAvailable {
+    color: #6b7280; /* Gray */
+  }
+
+  .offline {
+    color: #ef4444; /* Red */
+  }
+
+  .yellow {
+    color: goldenrod;
+  }
