@@ -17,9 +17,9 @@ export default function ContainersPage() {
   }, [router]);
 
   const containers = [
-    { name: 'Zorneding CT', status: 'Online', mode: 'Regular', alarms: '✅', alarmType: 'green' },
-    { name: 'Anzing CT', status: 'Offline', mode: 'Switch Off', alarms: '⚠️', alarmType: 'yellow' },
-    { name: 'Poing CT', status: 'Not Available', mode: 'Not available', alarms: '❗', alarmType: 'red' },
+    { name: 'Container 1', status: 'Online', mode: 'Regular', alarms: '✅', alarmType: 'green' },
+    { name: 'Container 2', status: 'Offline', mode: 'Switch Off', alarms: '⚠️', alarmType: 'yellow' },
+    { name: 'Container 3', status: 'Not Available', mode: 'Not available', alarms: '❗', alarmType: 'red' },
   ];
 
   const handleRowClick = (name: string) => {

@@ -12,7 +12,7 @@ export default function Jahresarbeitzahl() {
       {
         type: 'bar' as const,
         label: 'Energieverbrauch (kWh)',
-        data: [500, 800, 900, 1500, 2000, 2500, 2700, 2000, 1700, 1200, 800, 400],
+        data: [1000, 900, 800, 700, 600, 500, 500, 600, 700, 800, 900, 1000],
         backgroundColor: 'rgba(255, 165, 0, 0.8)', // Orange bars
         borderColor: 'rgba(255, 165, 0, 1)',
         borderWidth: 1,
@@ -21,7 +21,7 @@ export default function Jahresarbeitzahl() {
       {
         type: 'bar' as const,
         label: 'Erzeugte Wärmeenergie (kWh)',
-        data: [700, 1000, 1100, 1800, 2400, 2800, 3000, 2500, 2100, 1600, 1000, 600],
+        data: [3000, 2700, 2600, 2500, 1500, 1200, 1200, 1200, 1700, 2400, 2600, 3000],
         backgroundColor: 'rgba(255, 99, 132, 0.8)', // Red-orange bars
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1,
@@ -30,7 +30,7 @@ export default function Jahresarbeitzahl() {
       {
         type: 'line' as const,
         label: 'Jahresarbeitszahl (JAZ)',
-        data: [2.6, 2.8, 3.0, 3.2, 3.4, 3.8, 4.0, 3.7, 3.5, 3.3, 2.9, 2.6],
+        data: [2.5, 2.7, 2.9, 3.3, 3.6, 3.9, 4.0, 3.9, 3.6, 3.2, 2.8, 2.5],
         borderColor: 'red',
         backgroundColor: 'red',
         pointBackgroundColor: 'red',
@@ -46,11 +46,12 @@ export default function Jahresarbeitzahl() {
     maintainAspectRatio: false,
     plugins: {
       legend: {
+        display: true,
         position: 'top' as const,
       },
       title: {
         display: true,
-        text: 'Energieverbrauch, Wärmeenergie und temperaturabhängige Jahresarbeitszahl (JAZ)',
+        text: "Energieverbrauch, Wärmeenergie und temperaturabhängige Jahresarbeitszahl (JAZ)",
       },
     },
     scales: {
@@ -60,7 +61,10 @@ export default function Jahresarbeitzahl() {
         position: 'left' as const,
         title: {
           display: true,
-          text: 'Energie (kWh)',
+          text: "Energie (kWh)",
+        },
+        ticks: {
+          stepSize: 500, // Adjust this based on y-axis increment in the screenshot
         },
       },
       y1: {
@@ -69,10 +73,26 @@ export default function Jahresarbeitzahl() {
         position: 'right' as const,
         title: {
           display: true,
-          text: 'Jahresarbeitszahl (JAZ)',
+          text: "Jahresarbeitszahl (JAZ)",
+          color: "red",
         },
         grid: {
           drawOnChartArea: false,
+        },
+        ticks: {
+          color: "red",
+          stepSize: 0.2, // Set the step size as in the screenshot
+          font: {
+            size: 12, // Adjust the font size if needed
+          },
+        },
+        min: 2.4, // Ensure the y1 scale starts at 2.0
+        max: 4, // Set the maximum value to 4.0
+      },
+      x: {
+        title: {
+          display: true,
+          text: "Monate",
         },
       },
     },
@@ -84,7 +104,7 @@ export default function Jahresarbeitzahl() {
         <div className="col-lg-10">
           <div className="card">
             <div className="card-body">
-              <div style={{ height: '500px' }}>
+              <div style={{ height: '500px', width: '100%' }}>
                 <Chart type="bar" data={data} options={options} />
               </div>
             </div>
