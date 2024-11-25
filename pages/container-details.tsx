@@ -80,7 +80,7 @@ export default function ContainerDetails() {
         lastOnline: '21-Nov-2024 11:06',
         control: true,
         weather: {
-          temperature: 2,
+          temperature: 14,
           condition: 'Windy',
           chartData: {
             labels: ['7/16', '8/16', '20/15', '5/14'],

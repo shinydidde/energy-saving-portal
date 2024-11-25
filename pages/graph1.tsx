@@ -80,7 +80,6 @@ export default function Jahresarbeitzahl() {
 
   return (
     <div className="container py-4">
-      <h1 className="text-center mb-4">Page 4 - Jahresarbeitzahl</h1>
       <div className="row justify-content-center">
         <div className="col-lg-10">
           <div className="card">
