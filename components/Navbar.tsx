@@ -1,7 +1,5 @@
-// components/Navbar.tsx
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import styles from '../styles/Navbar.module.css';
 
 export default function Navbar() {
   const router = useRouter();
@@ -12,13 +10,36 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={styles.navbar}>
-      <div className={styles.navItems}>
-        <Link className={styles.navLink} href="/containers">Containers</Link>
-      </div>
-      <button className={styles.logoutButton} onClick={handleLogout}>
+    <nav className="navbar navbar-expand-lg navbar-light custom-navbar px-4">
+  <div className="container-fluid">
+    <Link className="navbar-brand fw-bold" href="/containers">
+      Container App
+    </Link>
+    <button
+      className="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className="collapse navbar-collapse" id="navbarNav">
+      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+        <li className="nav-item">
+          <Link className="nav-link active" href="/containers">
+            Containers
+          </Link>
+        </li>
+      </ul>
+      <button className="btn btn-outline-danger" onClick={handleLogout}>
         Logout
       </button>
-    </nav>
+    </div>
+  </div>
+</nav>
+
   );
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import styles from '../styles/YearComparison.module.css';
 import Navbar from '@/components/Navbar';
 
 // Register necessary components
@@ -45,11 +44,11 @@ export default function YearComparison() {
         responsive: true,
         plugins: {
             legend: {
-                position: 'top' as const, // Explicitly specify 'top' as a literal type
+                position: 'top' as const,
             },
             title: {
                 display: true,
-                text: 'Jahresarbeitzahl',
+                text: 'Yearly Energy Comparison (kWh)',
             },
         },
         scales: {
@@ -61,7 +60,6 @@ export default function YearComparison() {
             },
         },
     };
-
 
     // Table data
     const tableData = [
@@ -114,38 +112,54 @@ export default function YearComparison() {
 
     return (
         <>
-        <Navbar/>
-            <div className={styles.container}>
-                <div className={styles.chartContainer}>
-                    <Bar data={data} options={options} />
+            <Navbar />
+            <div className="container py-4">
+                {/* Chart Section */}
+                <div className="row mb-4">
+                    <div className="col-12">
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title">Yearly Energy Comparison</h5>
+                                <div>
+                                    <Bar data={data} options={options} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className={styles.tableContainer}>
-                    <table className={styles.table}>
-                        <thead>
-                            <tr>
-                                <th>Year</th>
-                                <th>Jan</th>
-                                <th>Feb</th>
-                                <th>Mar</th>
-                                <th>Dec</th>
-                                <th>Avg</th>
-                                <th>Max</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {tableData.map((row, index) => (
-                                <tr key={index}>
-                                    <td>{row.year}</td>
-                                    <td>{row.jan}</td>
-                                    <td>{row.feb}</td>
-                                    <td>{row.mar}</td>
-                                    <td>{row.dec}</td>
-                                    <td>{row.avg}</td>
-                                    <td>{row.max}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+
+                {/* Table Section */}
+                <div className="row">
+                    <div className="col-12">
+                        <div className="table-responsive">
+                            <table className="table table-bordered table-hover">
+                                <thead className="table-light">
+                                    <tr>
+                                        <th>Year</th>
+                                        <th>Jan</th>
+                                        <th>Feb</th>
+                                        <th>Mar</th>
+                                        <th>Dec</th>
+                                        <th>Avg</th>
+                                        <th>Max</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {tableData.map((row, index) => (
+                                        <tr key={index}>
+                                            <td>{row.year}</td>
+                                            <td>{row.jan}</td>
+                                            <td>{row.feb}</td>
+                                            <td>{row.mar}</td>
+                                            <td>{row.dec}</td>
+                                            <td>{row.avg}</td>
+                                            <td>{row.max}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

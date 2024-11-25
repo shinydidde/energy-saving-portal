@@ -61,9 +61,6 @@ export default function LoginPage() {
         <button type="submit" className={styles.loginButton}>
           Login
         </button>
-        <div className={styles.footer}>
-          <a href="#">Forgot password?</a>
-        </div>
       </form>
     </div>
   );

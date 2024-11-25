@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import styles from '../styles/ContainerDetails.module.css';
 import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 import Navbar from '@/components/Navbar';
+import Modal from '@/components/Modal';
 
 interface Weather {
     temperature: number;
@@ -58,6 +58,8 @@ export default function ContainerDetails() {
     const { name } = router.query;
 
     const [containerData, setContainerData] = useState<ContainerData | null>(null);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedAlarm, setSelectedAlarm] = useState<{ name: string; alarmType: string } | null>(null);
 
     useEffect(() => {
         if (name) {
@@ -108,47 +110,98 @@ export default function ContainerDetails() {
         }
     };
 
+    const handleAlarmClick = () => {
+        setSelectedAlarm({ name: name as string, alarmType: containerData.alarmType });
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+        setSelectedAlarm(null);
+    };
+
     const { id, status, alarms, alarmType, mode, lastOnline, control, weather, energy, heatPumps, performance } =
         containerData;
 
     return (
         <>
             <Navbar />
-            <div className={styles.container}>
-                <div className={styles.layout}>
+            <div className="container py-4">
+                <div className="row">
                     {/* Sidebar */}
-                    <div className={styles.sidebar}>
-                        <h2>Container Details</h2>
-                        <p><strong>Name:</strong> {name}</p>
-                        <p><strong>ID:</strong> {id}</p>
-                        <p>
-                            <strong>Status:</strong> <span className={styles.status}>{status}</span>
-                        </p>
-                        <p>
-                            <strong>Alarms:</strong>{' '}
-                            <span className={`${styles.alarms} ${styles[alarmType]}`}>{alarms}</span>
-                        </p>
-                        <p><strong>Mode:</strong> {mode}</p>
-                        <p><strong>Last Online:</strong> {lastOnline}</p>
-                        <div className={styles.control}>
-                            <strong>Control:</strong>
-                            <div
-                                className={`${styles.switch} ${control ? styles.on : styles.off}`}
-                                onClick={toggleControl}
-                                style={{ cursor: 'pointer' }}
-                            >
-                                <div className={styles.toggleCircle}></div>
+                    <div className="col-lg-3 col-md-4 mb-4">
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title">Container Details</h5>
+                                <p>
+                                    <strong>Name:</strong> {name}
+                                </p>
+                                <p>
+                                    <strong>ID:</strong> {id}
+                                </p>
+                                <p>
+                                    <strong>Status:</strong>{' '}
+                                    <span
+                                        className={`fw-bold ${status === 'Online' ? 'text-success' : status === 'Not Available' ? 'text-secondary' : 'text-danger'
+                                            }`}
+                                    >
+                                        {status}
+                                    </span>
+                                </p>
+                                <p>
+                                    <strong>Alarms:</strong>{' '}
+                                    <span
+                                        className={`fw-bold ${alarmType === 'green' ? 'text-success' : alarmType === 'yellow' ? 'text-warning' : 'text-danger'
+                                            }`}
+                                        style={{ cursor: 'pointer' }}
+                                        onClick={handleAlarmClick}
+                                    >
+                                        {alarms}
+                                    </span>
+                                </p>
+                                <p>
+                                    <strong>Mode:</strong> {mode}
+                                </p>
+                                <p>
+                                    <strong>Last Online:</strong> {lastOnline}
+                                </p>
+                                <div>
+                                    <strong>Control:</strong>
+                                    <div
+                                        className={`d-inline-block ms-2 ${control ? 'bg-success' : 'bg-danger'}`}
+                                        style={{
+                                            width: '50px',
+                                            height: '25px',
+                                            borderRadius: '15px',
+                                            position: 'relative',
+                                            cursor: 'pointer',
+                                        }}
+                                        onClick={toggleControl}
+                                    >
+                                        <div
+                                            className="bg-white"
+                                            style={{
+                                                width: '20px',
+                                                height: '20px',
+                                                borderRadius: '50%',
+                                                position: 'absolute',
+                                                top: '50%',
+                                                transform: 'translateY(-50%)',
+                                                left: control ? 'calc(100% - 25px)' : '5px',
+                                                transition: 'left 0.3s ease',
+                                            }}
+                                        ></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
                     </div>
 
                     {/* Main Content */}
-                    <div className={styles.content}>
-                        {/* Energy Section */}
-                        <h2>{name} Information</h2>
-                        <table className={styles.table}>
-                            <thead>
+                    <div className="col-lg-6 col-md-8 mb-4">
+                        <h4 className="mb-3">{name} Information</h4>
+                        <table className="table table-bordered mb-4">
+                            <thead className="table-light">
                                 <tr>
                                     <th>Power (kW)</th>
                                     <th>Prev. Month Energy (kWh)</th>
@@ -172,37 +225,39 @@ export default function ContainerDetails() {
                             </tbody>
                         </table>
 
-                        {/* Heat Pumps */}
-                        <h3>Heat Pumps</h3>
-                        <table className={styles.table}>
-                            <thead>
-                                <tr>
-                                    <th>Status</th>
-                                    <th>Forward Temp (°C)</th>
-                                    <th>Reverse Temp (°C)</th>
-                                    <th>Power (kW)</th>
-                                    <th>Energy (kWh)</th>
-                                    <th>Hours</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {heatPumps.map((pump, index) => (
-                                    <tr key={index}>
-                                        <td>{pump.status}</td>
-                                        <td>{pump.forwardTemp}</td>
-                                        <td>{pump.reverseTemp}</td>
-                                        <td>{pump.power}</td>
-                                        <td>{pump.energy}</td>
-                                        <td>{pump.hours}</td>
+                        <h5 className="mb-3">Heat Pumps</h5>
+                        <div className="table-responsive">
+                            <table className="table table-bordered">
+                                <thead className="table-light">
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Forward Temp (°C)</th>
+                                        <th>Reverse Temp (°C)</th>
+                                        <th>Power (kW)</th>
+                                        <th>Energy (kWh)</th>
+                                        <th>Hours</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {heatPumps.map((pump, index) => (
+                                        <tr key={index}>
+                                            <td>{pump.status}</td>
+                                            <td>{pump.forwardTemp}</td>
+                                            <td>{pump.reverseTemp}</td>
+                                            <td>{pump.power}</td>
+                                            <td>{pump.energy}</td>
+                                            <td>{pump.hours}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+
 
                         {/* Coefficient Of Performance */}
-                        <h3>Coefficient Of Performance</h3>
-                        <table className={`${styles.table} ${styles.performance}`}>
-                            <thead>
+                        <h5 className="mb-3">Coefficient Of Performance</h5>
+                        <table className="table table-bordered">
+                            <thead className="table-light">
                                 <tr>
                                     <th>Previous Month</th>
                                     <th>Current Month</th>
@@ -224,16 +279,28 @@ export default function ContainerDetails() {
                     </div>
 
                     {/* Weather Section */}
-                    <div className={styles.weather}>
-                        <h2>Weather Information</h2>
-                        <p><strong>Location:</strong> {name}</p>
-                        <p className={styles.temperature}>{weather.temperature}°C</p>
-                        <p>{weather.condition}</p>
-                        <div className={styles.chart}>
-                            <Bar data={weather.chartData} />
+                    <div className="col-lg-3 col-md-12">
+                        <div className="card">
+                            <div className="card-body text-center">
+                                <h5>Weather Information</h5>
+                                <p className="display-4">{weather.temperature}°C</p>
+                                <p>{weather.condition}</p>
+                                <div style={{ height: '300px', width: '100%' }}> {/* Adjust the height and width */}
+                                    <Bar
+                                        data={weather.chartData}
+                                        options={{
+                                            maintainAspectRatio: false, // Disable aspect ratio for custom sizing
+                                        }}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
+
+                {/* Modal */}
+                <Modal isOpen={showModal} onClose={closeModal} containerData={selectedAlarm} />
             </div>
         </>
     );

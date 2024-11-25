@@ -40,3 +40,9 @@ h5 {
   margin: 0 auto;  /* Center the chart horizontally */
 }
 
+
+
+.custom-navbar {
+  background-color: #a2d9a7; /* Replace with your desired color */
+  border-bottom: 1px solid #ddd; /* Optional: Add a border for better contrast */
+}
