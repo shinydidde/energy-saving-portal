@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import Navbar from '@/components/Navbar';
 import Modal from '@/components/Modal';
@@ -22,6 +22,7 @@ interface Energy {
 }
 
 interface HeatPump {
+    name: string;
     status: string;
     forwardTemp: number | string;
     reverseTemp: number | string;
@@ -90,10 +91,10 @@ export default function ContainerDetails() {
                     output: { power: 80, prevMonth: 885, currentMonth: 750, percentDiff: 15.25 },
                 },
                 heatPumps: [
-                    { status: 'On', forwardTemp: 80, reverseTemp: 65, power: 14, energy: 123, hours: 9 },
-                    { status: 'Off', forwardTemp: 50, reverseTemp: 60, power: 0, energy: 300, hours: 25 },
-                    { status: 'On', forwardTemp: 79, reverseTemp: 68, power: 12, energy: 250, hours: 21 },
-                    { status: 'Not Available', forwardTemp: '-', reverseTemp: '-', power: '-', energy: '-', hours: '-' },
+                    { name: 'Heat Pump 1', status: 'On', forwardTemp: 80, reverseTemp: 65, power: 14, energy: 123, hours: 9 },
+                    { name: 'Heat Pump 2', status: 'Off', forwardTemp: 50, reverseTemp: 60, power: 0, energy: 300, hours: 25 },
+                    { name: 'Heat Pump 3', status: 'On', forwardTemp: 79, reverseTemp: 68, power: 12, energy: 250, hours: 21 },
+                    { name: 'Heat Pump 4', status: 'Not Available', forwardTemp: '-', reverseTemp: '-', power: '-', energy: '-', hours: '-' },
                 ],
                 performance: { prevMonth: 3.5, currentMonth: 3.1, percentDiff: 11.43 },
             });
@@ -165,7 +166,11 @@ export default function ContainerDetails() {
                                 <p>
                                     <strong>Last Online:</strong> {lastOnline}
                                 </p>
-                                <div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="card mt-2">
+                                <div className="card-body d-flex align-items-center">
                                     <strong>Control:</strong>
                                     <div
                                         className={`d-inline-block ms-2 ${control ? 'bg-success' : 'bg-danger'}`}
@@ -194,6 +199,7 @@ export default function ContainerDetails() {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
@@ -203,6 +209,7 @@ export default function ContainerDetails() {
                         <table className="table table-bordered mb-4">
                             <thead className="table-light">
                                 <tr>
+                                    <th></th>
                                     <th>Power (kW)</th>
                                     <th>Prev. Month Energy (kWh)</th>
                                     <th>Current Month Energy (kWh)</th>
@@ -210,13 +217,21 @@ export default function ContainerDetails() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                            <tr
+                                    onClick={() => router.push('/graph2')} // Redirect to `graph2` page
+                                    style={{ cursor: 'pointer' }} // Indicate clickable row
+                                >
+                                    <td>Input</td>
                                     <td>{energy.input.power}</td>
                                     <td>{energy.input.prevMonth}</td>
                                     <td>{energy.input.currentMonth}</td>
                                     <td>{energy.input.percentDiff}</td>
                                 </tr>
-                                <tr>
+                                <tr
+                                    onClick={() => router.push('/graph2')} // Redirect to `graph2` page
+                                    style={{ cursor: 'pointer' }} // Indicate clickable row
+                                >
+                                    <td>Output</td>
                                     <td>{energy.output.power}</td>
                                     <td>{energy.output.prevMonth}</td>
                                     <td>{energy.output.currentMonth}</td>
@@ -230,6 +245,7 @@ export default function ContainerDetails() {
                             <table className="table table-bordered">
                                 <thead className="table-light">
                                     <tr>
+                                        <th>Name</th>
                                         <th>Status</th>
                                         <th>Forward Temp (°C)</th>
                                         <th>Reverse Temp (°C)</th>
@@ -241,6 +257,7 @@ export default function ContainerDetails() {
                                 <tbody>
                                     {heatPumps.map((pump, index) => (
                                         <tr key={index}>
+                                            <td>{pump.name}</td>
                                             <td>{pump.status}</td>
                                             <td>{pump.forwardTemp}</td>
                                             <td>{pump.reverseTemp}</td>
@@ -266,8 +283,8 @@ export default function ContainerDetails() {
                             </thead>
                             <tbody>
                                 <tr
-                                    onClick={() => router.push('/graph2')} // Redirect to `graph2` page
-                                    style={{ cursor: 'pointer' }} // Indicate clickable row
+                                    onClick={() => router.push('/graph1')}
+                                    style={{ cursor: 'pointer' }}
                                 >
                                     <td>{performance.prevMonth}</td>
                                     <td>{performance.currentMonth}</td>
@@ -286,10 +303,47 @@ export default function ContainerDetails() {
                                 <p className="display-4">{weather.temperature}°C</p>
                                 <p>{weather.condition}</p>
                                 <div style={{ height: '300px', width: '100%' }}> {/* Adjust the height and width */}
-                                    <Bar
-                                        data={weather.chartData}
+                                    <Line
+                                        data={{
+                                            labels: weather.chartData.labels,
+                                            datasets: [
+                                                {
+                                                    type: 'line', // Change dataset type to 'line'
+                                                    label: 'Temperature (°C)',
+                                                    data: weather.chartData.datasets[0].data,
+                                                    borderColor: '#1E90FF', // Blue line
+                                                    backgroundColor: 'rgba(30, 144, 255, 0.2)', // Light blue fill
+                                                    fill: true, // Enable area under the line
+                                                    tension: 0.4, // Smooth line
+                                                },
+                                            ],
+                                        }}
                                         options={{
                                             maintainAspectRatio: false, // Disable aspect ratio for custom sizing
+                                            plugins: {
+                                                legend: {
+                                                    display: true,
+                                                    position: 'top',
+                                                },
+                                                title: {
+                                                    display: true,
+                                                    text: 'Temperature Over Time',
+                                                },
+                                            },
+                                            scales: {
+                                                x: {
+                                                    title: {
+                                                        display: true,
+                                                        text: 'Time',
+                                                    },
+                                                },
+                                                y: {
+                                                    title: {
+                                                        display: true,
+                                                        text: 'Temperature (°C)',
+                                                    },
+                                                },
+                                            },
                                         }}
                                     />
                                 </div>

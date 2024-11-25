@@ -47,7 +47,7 @@ export default function ContainersPage() {
                 <th>Container Name</th>
                 <th>Status</th>
                 <th>Mode</th>
-                <th>Alarms</th>
+                <th className='text-center'>Alarms</th>
               </tr>
             </thead>
             <tbody>
