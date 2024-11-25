@@ -81,7 +81,7 @@ export default function ContainerDetails() {
         control: true,
         weather: {
           temperature: 14,
-          condition: 'Windy',
+          condition: 'Rain',
           chartData: {
             labels: ['7/16', '8/16', '20/15', '5/14'],
             datasets: [
